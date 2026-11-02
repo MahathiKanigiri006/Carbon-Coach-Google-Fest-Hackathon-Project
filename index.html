@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Track your personal carbon footprint and get practical, AI-powered ways to reduce it."
+    />
+    <meta name="theme-color" content="#f5f8f4" />
+    <title>Carbon Coach — Your footprint, in focus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+    <script src="/static/script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <button class="mobile-backdrop" id="mobile-backdrop" aria-label="Close navigation"></button>
+      <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#dashboard" data-page="dashboard" aria-label="Carbon Coach home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M25.8 5.2C17.7 5 9.3 7 7 13.7c-1.6 4.7 2 8.2 6.2 7.5 6.3-1 9.9-9.2 12.6-16Z" fill="currentColor"/><path d="M5.5 27c3.4-7.1 8-11.3 14.2-15.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </span>
+          <span class="brand-name">carbon<span>coach</span></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="nav-list">
+          <a class="nav-link active" href="#dashboard" data-page="dashboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg>
+            <span>Overview</span>
+          </a>
+          <a class="nav-link" href="#track" data-page="track">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="9"/></svg>
+            <span>Track activity</span>
+          </a>
+          <a class="nav-link" href="#recommendations" data-page="recommendations">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 14.7 9.3 21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7L12 3Z"/></svg>
+            <span>AI recommendations</span>
+          </a>
+          <a class="nav-link" href="#assistant" data-page="assistant">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg>
+            <span>Carbon Coach AI</span>
+            <span class="nav-ai-dot"></span>
+          </a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="impact-card">
+            <div class="impact-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c4.4-2.2 7-5.7 7-10.5A7 7 0 0 0 5 11.5C5 16.3 7.6 19.8 12 22Z"/><path d="M12 18v-7m0 3-3-3m3 1 3-3"/></svg>
+            </div>
+            <p>Small steps add up.</p>
+            <span>Every action is a step toward a lighter footprint.</span>
+          </div>
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode">
+            <svg class="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+            <span>Dark appearance</span>
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          </button>
+          <div class="sidebar-footnote"><span class="status-dot"></span> Your personal impact space</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Open navigation">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong id="breadcrumb-current">Overview</strong></div>
+          <div class="topbar-right">
+            <span class="session-label"><span class="status-dot"></span> Current session</span>
+            <div class="avatar" aria-label="Personal workspace">C</div>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <section class="page-view active" id="page-dashboard" aria-labelledby="dashboard-title">
+            <div class="page-heading heading-dashboard">
+              <div>
+                <div class="eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL IMPACT</div>
+                <h1 id="dashboard-title">A clearer view of your <span>footprint.</span></h1>
+                <p class="page-subtitle">Measure your impact. Reduce your footprint. Protect our planet.</p>
+              </div>
+              <button class="button button-primary" type="button" data-navigate="track">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                Log an activity
+              </button>
+            </div>
+
+            <div class="dashboard-banner">
+              <div class="banner-copy">
+                <span class="banner-kicker">A LITTLE MORE MINDFUL, EVERY DAY</span>
+                <h2>Progress starts with knowing.</h2>
+                <p>Your footprint is personal. Your next step can be, too.</p>
+                <button class="text-button" type="button" data-navigate="assistant">Talk to Carbon Coach AI <span aria-hidden="true">→</span></button>
+              </div>
+              <div class="banner-art" aria-hidden="true">
+                <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+                <div class="art-sun"></div><div class="art-hill hill-back"></div><div class="art-hill hill-front"></div>
+                <div class="art-leaf leaf-one"></div><div class="art-leaf leaf-two"></div><div class="art-leaf leaf-three"></div>
+              </div>
+              <div class="banner-grain" aria-hidden="true"></div>
+            </div>
+
+            <div class="section-title-row">
+              <div><h2>Your carbon snapshot</h2><p>Based on activities in this session</p></div>
+              <span class="data-caption"><span class="status-dot"></span> Live session data</span>
+            </div>
+            <div class="stats-grid">
+              <article class="stat-card stat-total">
+                <div class="stat-top"><span class="stat-label">Total footprint</span><span class="stat-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 3.8C14.3 3.6 8.1 5 6.4 9.9c-1.2 3.4 1.4 5.9 4.5 5.4 4.6-.7 7.1-6.7 9.3-11.5Z"/><path d="M4 20c2.5-5.2 5.8-8.3 10.4-11.4"/></svg></span></div>
+                <div class="stat-value"><span id="stat-total">—</span><small>kg CO₂e</small></div>
+                <div class="stat-note">Across all recorded activities</div>
+                <div class="stat-accent accent-total"></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-label">Travel</span><span class="stat-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14l1-8H4l1 8Z"/><path d="M7 9V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M7 17v2m10-2v2M6 13h.01M18 13h.01"/></svg></span></div>
+                <div class="stat-value"><span id="stat-travel">—</span><small>kg CO₂e</small></div>
+                <div class="stat-note">Transport emissions</div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-label">Electricity</span><span class="stat-icon amber"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6L10 22l9.5-12h-6L13 2Z"/></svg></span></div>
+                <div class="stat-value"><span id="stat-electricity">—</span><small>kg CO₂e</small></div>
+                <div class="stat-note">Energy use emissions</div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-label">Food</span><span class="stat-icon coral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a8 8 0 0 1-16 0ZM12 3v2m6-1-1 2M6 4l1 2"/></svg></span></div>
+                <div class="stat-value"><span id="stat-food">—</span><small>kg CO₂e</small></div>
+                <div class="stat-note">Estimated diet emissions</div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-label">Waste</span><span class="stat-icon mint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18m-2 0-1 14H6L5 6m4 0V4h6v2m-5 4v6m4-6v6"/></svg></span></div>
+                <div class="stat-value"><span id="stat-waste">—</span><small>kg CO₂e</small></div>
+                <div class="stat-note">Disposal emissions</div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-top"><span class="stat-label">Activities</span><span class="stat-icon lavender"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span></div>
+                <div class="stat-value"><span id="stat-count">—</span><small>recorded</small></div>
+                <div class="stat-note">Logged in this session</div>
+              </article>
+              <article class="stat-card stat-potential">
+                <div class="stat-top"><span class="stat-label">Reduction potential</span><span class="stat-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></span></div>
+                <div class="stat-value"><span id="stat-potential">—</span><small>kg CO₂e</small></div>
+                <div class="stat-note">Estimated, not guaranteed savings</div>
+                <div class="stat-accent accent-potential"></div>
+              </article>
+            </div>
+
+            <div class="insights-grid">
+              <article class="panel chart-panel">
+                <div class="panel-heading"><div><h3>Emissions by category</h3><p>Your recorded footprint, by source</p></div><span class="panel-badge">kg CO₂e</span></div>
+                <div class="donut-layout" id="category-chart-wrap">
+                  <div class="chart-canvas-wrap"><canvas id="category-chart" role="img" aria-label="Doughnut chart of emissions by category"></canvas></div>
+                  <div class="chart-legend" id="category-legend"></div>
+                </div>
+                <div class="chart-empty hidden" id="category-empty"><span class="empty-illustration small"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M25 42c8-4 13-11 13-21A14 14 0 0 0 10 21c0 10 5 17 15 21Z"/><path d="M25 36V21m0 7-6-6m6 2 6-6"/></svg></span><strong>Nothing to chart just yet</strong><span>Log an activity to see your breakdown.</span></div>
+              </article>
+              <article class="panel chart-panel">
+                <div class="panel-heading"><div><h3>Category comparison</h3><p>Compare your recorded sources</p></div><span class="panel-badge">kg CO₂e</span></div>
+                <div class="bar-chart-wrap" id="comparison-chart-wrap"><canvas id="comparison-chart" role="img" aria-label="Bar chart comparing emissions by category"></canvas></div>
+                <div class="chart-empty hidden" id="comparison-empty"><span class="empty-illustration small"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38V25h7v13m5 0V12h7v26m5 0V19h7v19M5 42h38"/></svg></span><strong>Your comparison will appear here</strong><span>Record an activity to get started.</span></div>
+              </article>
+            </div>
+
+            <div class="bottom-grid">
+              <article class="panel activity-panel">
+                <div class="panel-heading"><div><h3>Recent activity</h3><p>Your latest footprint entries</p></div><button class="subtle-link" type="button" data-navigate="track">View all <span aria-hidden="true">→</span></button></div>
+                <div id="activity-list" class="activity-list"></div>
+              </article>
+              <article class="panel recommendation-preview">
+                <div class="panel-heading"><div><h3>A thoughtful next step</h3><p>Personalized for your footprint</p></div><span class="mini-sparkle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3L12 3Z"/></svg></span></div>
+                <div id="recommendation-preview"></div>
+                <button class="button button-secondary full-button" type="button" data-navigate="recommendations">Explore recommendations <span aria-hidden="true">→</span></button>
+              </article>
+            </div>
+            <div class="page-footnote">All totals reflect your current ADK session and are not date-filtered.</div>
+          </section>
+
+          <section class="page-view" id="page-track" aria-labelledby="track-title">
+            <div class="page-heading">
+              <div><div class="eyebrow"><span class="eyebrow-line"></span> BUILD YOUR PICTURE</div><h1 id="track-title">Track an <span>activity.</span></h1><p class="page-subtitle">A little detail helps Carbon Coach understand your impact.</p></div>
+              <span class="page-heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="9"/></svg></span>
+            </div>
+            <div class="tracking-grid">
+              <article class="panel form-panel">
+                <div class="form-card-heading"><span class="form-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17h14l1-8H4l1 8Z"/><path d="M7 9V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3M7 17v2m10-2v2M6 13h.01M18 13h.01"/></svg></span><div><h2>Travel</h2><p>Log a journey by public transport</p></div></div>
+                <form data-category="travel" class="activity-form">
+                  <label for="travel-mode">Transport mode</label><select id="travel-mode" name="mode" required><option value="bus">Bus</option><option value="car">Car (petrol hatchback estimate)</option><option value="motorcycle">Motorcycle / scooter (under 110 cc estimate)</option><option value="auto_rickshaw">Auto-rickshaw (CNG estimate)</option><option value="train">Train</option><option value="metro">Metro (rail proxy estimate)</option></select><p class="field-help" id="travel-mode-help">Passenger-km estimate using a UK bus proxy; not India-specific.</p>
+                  <label for="travel-distance">Distance travelled</label><div class="input-unit"><input id="travel-distance" name="km" type="number" min="0.01" step="any" placeholder="e.g. 12.5" required /><span>km</span></div>
+                  <button class="button button-primary form-submit" type="submit"><span>Calculate travel emissions</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+                  <output class="calculation-result hidden" aria-live="polite"></output>
+                </form>
+              </article>
+              <article class="panel form-panel">
+                <div class="form-card-heading"><span class="form-icon amber"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13h6L10 22l9.5-12h-6L13 2Z"/></svg></span><div><h2>Electricity</h2><p>Record the energy you use</p></div></div>
+                <form data-category="electricity" class="activity-form">
+                  <label for="electricity-kwh">Electricity consumption</label><div class="input-unit"><input id="electricity-kwh" name="kwh" type="number" min="0.01" step="any" placeholder="e.g. 8.4" required /><span>kWh</span></div>
+                  <p class="form-spacer"></p><button class="button button-primary form-submit" type="submit"><span>Calculate electricity emissions</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+                  <output class="calculation-result hidden" aria-live="polite"></output>
+                </form>
+              </article>
+              <article class="panel form-panel">
+                <div class="form-card-heading"><span class="form-icon coral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a8 8 0 0 1-16 0ZM12 3v2m6-1-1 2M6 4l1 2"/></svg></span><div><h2>Food</h2><p>Estimate your daily diet impact</p></div></div>
+                <form data-category="food" class="activity-form">
+                  <label for="food-diet">Diet type</label><select id="food-diet" name="diet_type" required><option value="" disabled selected>Select a diet</option><option value="vegetarian">Vegetarian</option><option value="non_vegetarian">Non-vegetarian</option></select>
+                  <label for="food-days">Number of days</label><div class="input-unit"><input id="food-days" name="days" type="number" min="1" step="1" placeholder="e.g. 7" required /><span>days</span></div>
+                  <div class="notice"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>This is an approximate daily diet estimate, not a meal-specific measurement.</span></div>
+                  <button class="button button-primary form-submit" type="submit"><span>Calculate food estimate</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+                  <output class="calculation-result hidden" aria-live="polite"></output>
+                </form>
+              </article>
+              <article class="panel form-panel">
+                <div class="form-card-heading"><span class="form-icon mint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18m-2 0-1 14H6L5 6m4 0V4h6v2m-5 4v6m4-6v6"/></svg></span><div><h2>Waste</h2><p>Track how organic waste is handled</p></div></div>
+                <form data-category="waste" class="activity-form">
+                  <label for="waste-kg">Organic waste quantity</label><div class="input-unit"><input id="waste-kg" name="kg" type="number" min="0.01" step="any" placeholder="e.g. 2" required /><span>kg</span></div>
+                  <label for="waste-method">Disposal method</label><select id="waste-method" name="disposal_method" required><option value="" disabled selected>Select a method</option><option value="composting">Composting</option><option value="landfill">Landfill</option></select>
+                  <button class="button button-primary form-submit" type="submit"><span>Calculate waste emissions</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></button>
+                  <output class="calculation-result hidden" aria-live="polite"></output>
+                </form>
+              </article>
+            </div>
+            <div class="page-footnote">Calculations are performed by your Carbon Coach agent. Emission factors and assumptions are included with each result.</div>
+          </section>
+
+          <section class="page-view" id="page-recommendations" aria-labelledby="recommendations-title">
+            <div class="page-heading">
+              <div><div class="eyebrow"><span class="eyebrow-line"></span> SMALL CHANGES, REAL MOMENTUM</div><h1 id="recommendations-title">Your next steps, <span>made personal.</span></h1><p class="page-subtitle">Practical ideas shaped around the activities you have recorded.</p></div>
+              <span class="page-heading-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3L12 3Z"/></svg></span>
+            </div>
+            <div class="recommendation-summary" id="recommendation-summary"></div>
+            <div class="recommendation-grid" id="recommendation-list"></div>
+            <div class="disclaimer-panel"><span class="disclaimer-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg></span><div><strong>These are estimates, not guarantees.</strong><p>Potential savings are calculated by your agent using the assumptions shown on each suggestion. Actual outcomes depend on your choices and circumstances.</p></div></div>
+          </section>
+
+          <section class="page-view assistant-view" id="page-assistant" aria-labelledby="assistant-title">
+            <div class="page-heading assistant-heading">
+              <div><div class="eyebrow"><span class="eyebrow-line"></span> HERE TO HELP YOU MAKE SENSE OF IT</div><h1 id="assistant-title">Meet Carbon Coach <span>AI.</span></h1><p class="page-subtitle">Ask about your footprint, your activities, or what to try next.</p></div>
+              <button class="button button-secondary clear-chat" id="clear-chat" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18m-2 0-1 14H6L5 6m4 0V4h6v2"/></svg> Clear chat</button>
+            </div>
+            <div class="chat-layout panel">
+              <div class="chat-header">
+                <div class="chat-agent-avatar"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M25.8 5.2C17.7 5 9.3 7 7 13.7c-1.6 4.7 2 8.2 6.2 7.5 6.3-1 9.9-9.2 12.6-16Z" fill="currentColor"/><path d="M5.5 27c3.4-7.1 8-11.3 14.2-15.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span class="online-dot"></span></div>
+                <div class="chat-agent-info"><strong>Carbon Coach AI</strong><span><span class="status-dot"></span> Here to help</span></div>
+                <span class="chat-powered">Powered by your Carbon Coach agent</span>
+              </div>
+              <div class="chat-messages" id="chat-messages" aria-live="polite" aria-label="Chat messages">
+                <div class="welcome-message" id="chat-welcome">
+                  <div class="welcome-orb"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M25.8 5.2C17.7 5 9.3 7 7 13.7c-1.6 4.7 2 8.2 6.2 7.5 6.3-1 9.9-9.2 12.6-16Z" fill="currentColor"/><path d="M5.5 27c3.4-7.1 8-11.3 14.2-15.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></div>
+                  <h2>A lighter footprint starts with a conversation.</h2><p>I can help you understand your emissions and find practical ways to reduce them.</p>
+                  <div class="suggestion-label">TRY ASKING</div>
+                  <div class="suggestion-list">
+                    <button class="suggestion-chip" type="button" data-prompt="Calculate my carbon footprint.">Calculate my carbon footprint <span>↗</span></button>
+                    <button class="suggestion-chip" type="button" data-prompt="How can I reduce my emissions?">How can I reduce my emissions? <span>↗</span></button>
+                    <button class="suggestion-chip" type="button" data-prompt="Show my total emissions.">Show my total emissions <span>↗</span></button>
+                    <button class="suggestion-chip" type="button" data-prompt="How much carbon did I save?">How much carbon did I save? <span>↗</span></button>
+                    <button class="suggestion-chip" type="button" data-prompt="Give me eco-friendly suggestions.">Give me eco-friendly suggestions <span>↗</span></button>
+                  </div>
+                </div>
+              </div>
+              <form class="chat-compose" id="chat-form">
+                <label class="sr-only" for="chat-input">Message Carbon Coach AI</label>
+                <textarea id="chat-input" rows="1" maxlength="4000" placeholder="Ask Carbon Coach anything..." required></textarea>
+                <div class="compose-bottom"><span class="compose-hint">Carbon Coach uses your current session activity</span><button class="send-button" id="send-button" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13"/></svg></button></div>
+              </form>
+              <div class="chat-disclaimer">AI responses can make mistakes. Emissions estimates are based on the assumptions provided by your agent.</div>
+            </div>
+          </section>
+        </div>
+      </main>
+      <div class="toast-region" id="toast-region" aria-live="polite"></div>
+      <div class="global-loading hidden" id="global-loading" aria-hidden="true"><span class="loading-spinner"></span></div>
+    </div>
+  </body>
+</html>
